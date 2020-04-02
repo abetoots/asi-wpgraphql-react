@@ -1,0 +1,71 @@
+.Search {
+    $self: &;
+    box-sizing: border-box;
+    position: relative;
+
+    &.-focused:not(.-touched),
+    &:focus:not(.-touched) {
+        #{$self}__tooltip {
+            display: block;
+        }
+    }
+
+    &__label {
+        &.-hidden {
+            @include visually-hidden;
+        }
+    }
+
+    &__input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: .625rem;
+        border: none;
+        border-bottom: .0625rem solid #000;
+        min-width: 12.5rem;
+        background: transparent;
+        border-radius: 0;
+    }
+
+    &__tooltip {
+        display: none;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white;
+        color: black;
+        padding: 5px;
+        border-radius: 5px;
+
+        &::after {
+            content: " ";
+            position: absolute;
+            bottom: 100%;
+            /* At the top of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent white transparent;
+        }
+    }
+
+
+    &__icon {
+        height: fit-content;
+    }
+
+    &__button {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &__btnText {
+        &.-hidden {
+            @include visually-hidden;
+        }
+    }
+
+}

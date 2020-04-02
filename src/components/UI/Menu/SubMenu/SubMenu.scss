@@ -1,0 +1,42 @@
+.SubMenu {
+    $self: &;
+
+    transition: height .3s ease-in;
+    height: 0;
+    overflow: hidden;
+
+    &:focus-within {
+        height: initial;
+        overflow: unset;
+    }
+
+    &__ul {
+        list-style: none;
+        margin: 0;
+        padding: 1rem;
+
+        &.-horizontal {
+            display: flex;
+
+            #{$self}__li {
+                padding: 0 15px;
+            }
+
+        }
+    }
+
+    &__link {
+        text-decoration: none;
+        color: black;
+
+        &.active {
+            color: #d9121f;
+        }
+    }
+
+    &__touchTarget {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,37 @@
+.Results {
+    @include media-query($medium-up) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-rows: max-content;
+        gap: 15px;
+
+        &.-loading {
+            display: block;
+        }
+    }
+
+    &__slot {
+        &.-refresh {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            justify-content: center;
+
+            @include media-query($medium-up) {
+                grid-column: 1 /4;
+
+            }
+        }
+    }
+
+    &__refreshBtn {
+        cursor: pointer;
+        height: 100%;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        background-color: #024570;
+        color: white;
+    }
+
+}

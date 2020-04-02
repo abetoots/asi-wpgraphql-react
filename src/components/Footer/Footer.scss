@@ -1,0 +1,13 @@
+.Footer {
+    background-color: rgb(33, 37, 41);
+    color: #dee2e6;
+    margin-top: auto;
+    padding: .8rem;
+
+    @include media-query($medium-up) {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+    }
+}

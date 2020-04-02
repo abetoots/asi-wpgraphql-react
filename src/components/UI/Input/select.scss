@@ -1,0 +1,11 @@
+.Select {
+    background-color: #fff;
+    font: inherit;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:focus {
+        outline: none;
+    }
+}

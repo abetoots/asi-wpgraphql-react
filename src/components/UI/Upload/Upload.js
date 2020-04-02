@@ -1,0 +1,141 @@
+import React, { useRef } from "react";
+import PropTypes from "prop-types";
+import "./Upload.scss";
+
+import UploadPreview from "./UploadPreview/UploadPreview";
+import Choose from "./UploadButton/choose";
+import Save from "./UploadButton/save";
+import Remove from "./UploadButton/remove";
+
+/**
+ * TODO
+ * Defaults:
+ *  -
+ *
+ * Overrideables:
+ *  - override from props.customProps
+ *  - btnText: defaults to "Choose Upload"
+ *  - hasFileBtnText: when user currently has a file selection, this text takes over btnText. defaults to "Change Upload"
+ *  - override from props
+ *  - showPreview: set to false if we want to handle the preview box elsewhere. always true inside an <Input/>
+ *  - handleUpload: pass in a function to get the Save button to trigger the upload
+ *  - saveBtnComponent: pass in a component to use your own save button
+ *  - removeBtnComponent: pass in a component to use your own remove/delete button
+ *
+ */
+// eslint-disable-next-line react/display-name
+const Upload = props => {
+  let uploadInputRef;
+  if (props.inputRef) {
+    uploadInputRef = props.inputRef;
+  } else {
+    uploadInputRef = useRef(null);
+  }
+
+  const fileInputHandler = event => {
+    //Return when user doesn't select anything
+    if (event.target.files.length == 0) {
+      return;
+    }
+
+    //TODO link to explanation
+    //Cleanup the previous preview's file URL as the previous URL is still valid and attackers
+    //can use that URL to gain access to your file
+    if (props.state.preview) {
+      URL.revokeObjectURL(props.state.preview);
+    }
+
+    //Make a state copy then merge new values
+    const file = event.target.files[0];
+    props.stateHandler({
+      ...props.state,
+      file: file,
+      preview: URL.createObjectURL(file)
+    });
+  };
+
+  const removeBtnHandler = e => {
+    //TODO link as to why
+    //We always want to revoke previous object url
+    //Avoid memory issues by revoking the previous objecUrl created
+    URL.revokeObjectURL(props.state.preview);
+
+    props.stateHandler({
+      ...props.state,
+      file: "",
+      preview: ""
+    });
+  };
+
+  //Preview box
+  //Default: Not shown.
+  let preview;
+  if (props.showPreview) {
+    preview = <UploadPreview config={props.state} />;
+  }
+
+  //Controls
+  //Default: If children are found, all controls are to be handled by the children components
+  let controls;
+  if (props.children) {
+    //TODO type checking specific control buttons from /Buttons
+    //Distribute some of parent's props to the children
+    //https://reactjs.org/docs/react-api.html#reactchildren
+    //https://reactjs.org/docs/react-api.html#cloneelement
+    controls = React.Children.map(props.children, child =>
+      React.cloneElement(child, { state: props.state })
+    );
+  } else {
+    controls = (
+      <>
+        <Choose state={props.state} inputRef={uploadInputRef} />
+        <Save state={props.state} handleSave={props.handleUpload} />
+        <Remove state={props.state} handleRemove={removeBtnHandler} />
+      </>
+    );
+  }
+
+  //End controls
+
+  return (
+    <div className={props.className || "Upload"}>
+      <div className={props.wrapperClassName || "Upload__wrapper"}>
+        {preview}
+        {controls}
+      </div>
+      <input
+        className="Upload__input"
+        {...props.elementConfig}
+        onChange={fileInputHandler}
+        ref={uploadInputRef}
+        aria-labelledby={props.label.toLowerCase().replace(" ", "-")}
+      />
+    </div>
+  );
+};
+
+Upload.defaultProps = {
+  showPreview: false
+};
+
+Upload.propTypes = {
+  className: PropTypes.string,
+  elementConfig: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    accept: PropTypes.string.isRequired
+  }).isRequired,
+  handleUpload: PropTypes.func,
+  inputRef: PropTypes.object,
+  label: PropTypes.string.isRequired,
+  showPreview: PropTypes.bool,
+  state: PropTypes.shape({
+    file: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(File)])
+      .isRequired,
+    preview: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired
+  }).isRequired,
+  stateHandler: PropTypes.func.isRequired,
+  wrapperClassName: PropTypes.string
+};
+
+export default Upload;

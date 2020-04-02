@@ -1,0 +1,48 @@
+.Filters {
+
+    &__slot {
+        &.-mobile {
+            @include media-query($medium-up) {
+                display: none;
+            }
+        }
+
+        &.-desktop {
+            display: none;
+
+            @include media-query($medium-up) {
+                display: initial;
+            }
+        }
+    }
+
+
+    &__mobileBtn {
+        border: 1px solid #ececec;
+        border-radius: 5px;
+        background-color: white;
+        padding: 10px 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    &__mobileTarget {
+        position: absolute;
+        transition: all .4s ease;
+        left: -100%;
+        z-index: 200;
+        background-color: white;
+        padding: 5px;
+        border-radius: 5px;
+        min-height: 100vh;
+        top: 15px;
+
+        &.-toggled {
+            left: 0;
+        }
+
+        @include media-query($medium-up) {
+            position: initial;
+        }
+    }
+}

@@ -1,0 +1,11 @@
+.Upload {
+    &__wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    &__input {
+        @include visually-hidden;
+    }
+
+}

@@ -1,0 +1,18 @@
+.Directory {
+    box-sizing: border-box;
+
+    @include media-query($medium-up) {
+        display: grid;
+        grid-template-columns: minmax(20%, 30%) 1fr;
+        gap: 15px;
+    }
+
+    &__slot {
+        padding: 5px;
+
+        &.-loading {
+            display: initial;
+        }
+    }
+
+}
