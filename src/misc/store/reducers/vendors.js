@@ -1,5 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateObject } from "../../shared/helper-funcs";
+import { updateObject } from "@Shared/helper-funcs";
 
 const initialState = {
   fetching: false,

@@ -1,6 +1,6 @@
 import { initForm } from "./form-core";
-import { categories } from "../shared/categories";
-import { provinces } from "../shared/lists";
+import { categories } from "@Shared/categories";
+import { provinces } from "@Shared/lists";
 import {
   FULL_NAME,
   BUSINESS_NAME,
@@ -13,9 +13,8 @@ import {
   SOCIAL_WEBSITE,
   TEL_NUM,
   SOCIAL_FACEBOOK,
-  BUSINESS_DESCRIPTION,
-  PROFILE_PHOTO
-} from "../shared/constants";
+  BUSINESS_DESCRIPTION
+} from "@Shared/constants";
 
 const inputs = [
   //   {

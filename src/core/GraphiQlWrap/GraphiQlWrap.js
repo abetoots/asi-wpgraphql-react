@@ -3,7 +3,7 @@ import GraphiQL from "graphiql";
 import fetch from "isomorphic-fetch";
 import "graphiql/graphiql.css";
 
-import Layout from "../../components/layout";
+import Layout from "@Components/layout";
 
 const GraphiQlWrap = props => {
   const fetcher = async graphQlParams => {

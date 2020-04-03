@@ -2,7 +2,7 @@ import React from "react";
 import "./SvgButtons.scss";
 
 import PropTypes from "prop-types";
-import Button from "../UI/Button/Button";
+import Button from "@Bits/Button/Button";
 
 const SvgButtons = props => (
   <div className="SvgButtons">

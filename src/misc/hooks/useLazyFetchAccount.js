@@ -1,4 +1,4 @@
-import * as actions from "../store/actions/index";
+import * as actions from "@Store/actions/index";
 
 //TODO wrap these with an interceptor that automatically sets the token
 //Boilerplate GraphQl request that is not concerned with giving out UI hints

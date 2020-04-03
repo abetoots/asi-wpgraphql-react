@@ -6,24 +6,17 @@ import "./Home.scss";
 import { connect } from "react-redux";
 
 //Components
-import Layout from "../../components/layout";
-// import Hero from "../../components/Hero/Hero";
-import SvgButtons from "../../components/SvgButtons/SvgButtons";
-import Search from "../../components/UI/Search/Search";
-import SearchResults from "../../components/UI/Search/SearchResults/SearchResults";
+import Search from "@Bits/Search/Search";
+import SearchResults from "@Bits/Search/SearchResults/SearchResults";
+import Layout from "@Components/layout";
+import SvgButtons from "@Components/SvgButtons/SvgButtons";
 import { NavLink } from "react-router-dom";
 
-//Assets
-// import heroMobile from "../../assets/images/hero-mobile.jpg";
-// import heroTablet from "../../assets/images/hero-tablet.jpg";
-// import hero from "../../assets/images/hero-original.jpg";
-import { searchIcon3 } from "../../assets/search-icons";
-
 //Misc
-import { categories } from "../../misc/shared/categories";
-import { categoryIcons } from "../../misc/shared/categories";
-import useDebounce from "../../misc/hooks/useDebounce";
-import * as actions from "../../misc/store/actions/index";
+import { searchIcon3 } from "@Assets/search-icons";
+import useDebounce from "@Hooks/useDebounce";
+import { categories, categoryIcons } from "@Shared/categories";
+import * as actions from "@Store/actions/index";
 
 const Home = props => {
   const [inputVal, setInputVal] = useState("");

@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import loadable from "@loadable/component";
 
 const AsyncNotFound = loadable(() =>
-  import("../../components/NotFound404/NotFound404")
+  import("@Components/NotFound404/NotFound404")
 );
 
 const RoutesList = props => {

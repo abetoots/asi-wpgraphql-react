@@ -5,22 +5,22 @@ import "./Account.scss";
 import { connect } from "react-redux";
 
 //Components
-import Layout from "../../components/layout";
-import Form from "../../components/UI/Form/Form";
-import Input from "../../components/UI/Input/Input";
-import BoundaryRedirect from "../../hoc/BoundaryRedirect/BoundaryRedirect";
+import Form from "@Bits/Form/Form";
+import Input from "@Bits/Input/Input";
+import Layout from "@Components/layout";
+import BoundaryRedirect from "@Hoc/BoundaryRedirect/BoundaryRedirect";
 import ProfilePhoto from "./ProfilePhoto/ProfilePhoto";
 
 //Misc
-import inputs, { useFormState } from "../../misc/forms/account";
 import { store } from "../../index";
+import inputs, { useFormState } from "@Forms/account";
+import { useLazyUpdateAccount } from "@Hooks/useLazyUpdateAccount";
+import { useLazyFetchAccount } from "@Hooks/useLazyFetchAccount";
 import {
   getUpdateAccountMutation,
   getFetchAccountMutation
-} from "../../misc/shared/graphql-requests";
-import { useLazyUpdateAccount } from "../../misc/hooks/useLazyUpdateAccount";
-import { useLazyFetchAccount } from "../../misc/hooks/useLazyFetchAccount";
-import { USER_ID } from "../../misc/shared/constants";
+} from "@Shared/graphql-requests";
+import { USER_ID } from "@Shared/constants";
 
 //TODO Better user account UI (search dribble) and maybe similar to GoFundMe
 //TODO this should be Edit Account

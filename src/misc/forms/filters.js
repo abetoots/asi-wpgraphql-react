@@ -1,6 +1,6 @@
 import { initForm } from "./form-core";
-import { categories } from "../shared/categories";
-import { provinces } from "../shared/lists";
+import { categories } from "@Shared/categories";
+import { provinces } from "@Shared/lists";
 
 const inputs = [
   {

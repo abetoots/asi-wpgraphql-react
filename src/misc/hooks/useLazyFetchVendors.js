@@ -1,4 +1,4 @@
-import * as actions from "../store/actions/index";
+import * as actions from "@Store/actions/index";
 
 //Boilerplate GraphQl request that is not concerned with giving out UI hints
 //Dispatches store actions therefore UI should be handled using values from the store reducer

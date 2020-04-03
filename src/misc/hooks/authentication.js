@@ -5,9 +5,9 @@ import {
   AUTH_TOKEN,
   REFRESH_TOKEN,
   USER_ID
-} from "../shared/constants";
-import { getRefreshMutation } from "../shared/graphql-requests";
-import * as actions from "../store/actions/index";
+} from "@Shared/constants";
+import { getRefreshMutation } from "@Shared/graphql-requests";
+import * as actions from "@Store/actions/index";
 
 //Follow this auth flow : https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/#jwt_persist
 //For WPGraphQl , simplified : https://github.com/NeverNull/gatsby-apollo-wpgraphql-jwt-starter/issues/1

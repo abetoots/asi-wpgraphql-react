@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 //Components
-import BoundaryRedirect from "../../hoc/BoundaryRedirect/BoundaryRedirect";
+import BoundaryRedirect from "@Hoc/BoundaryRedirect/BoundaryRedirect";
 
 //Misc
-import * as actions from "../../misc/store/actions/index";
+import * as actions from "@Store/actions/index";
 
 const Logout = props => {
   useEffect(() => {

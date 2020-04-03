@@ -5,13 +5,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 //Components
-import Layout from "../../components/layout";
+import Layout from "@Components/layout";
 import Filters from "./Filters/Filters";
 import Results from "./Results/Results";
 
 //Misc
 import { store } from "../../index";
-import { useLazyFetchVendors } from "../../misc/hooks/useLazyFetchVendors";
+import { useLazyFetchVendors } from "@Hooks/useLazyFetchVendors";
 
 const Directory = props => {
   const [startFetchVendors] = useLazyFetchVendors(store.dispatch);

@@ -3,9 +3,9 @@ import "./Header.scss";
 
 import { NavLink } from "react-router-dom";
 
-import Logo from "../UI/Logo/Logo";
-import BurgerMenu from "../UI/BurgerMenu/BurgerMenu";
-import Menu from "../UI/Menu/Menu";
+import Logo from "@Bits/Logo/Logo";
+import BurgerMenu from "@Bits/BurgerMenu/BurgerMenu";
+import Menu from "@Bits/Menu/Menu";
 
 import logo from "../../assets/images/asi-logo.svg";
 import { authLinkList, unAuthLinkList } from "../../misc/shared/link-list";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Spinner2 from "../../components/UI/Spinner/Spinner2";
+import Spinner2 from "@Bits/Spinner/Spinner2";
 
 const Boundary = props => {
   if (props.loading) {

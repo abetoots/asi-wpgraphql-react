@@ -3,9 +3,9 @@ import "./Results.scss";
 import PropTypes from "prop-types";
 
 //Components
+import Spinner2 from "@Bits/Spinner/Spinner2";
 import ResultPreview from "./ResultPreview/ResultPreview";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Spinner2 from "../../../components/UI/Spinner/Spinner2";
 
 const Results = props => {
   let resultsWindow;

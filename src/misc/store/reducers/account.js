@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateObject } from "../../shared/helper-funcs";
-import { PROFILE_PHOTO } from "../../shared/constants";
+import { updateObject } from "@Shared/helper-funcs";
+import { PROFILE_PHOTO } from "@Shared/constants";
 
 const initialState = {
   calledFetch: false,

@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import "./About.scss";
 
-import TextImage from "../../components/TextImage/TextImage";
+import TextImage from "@Components/TextImage/TextImage";
 
-import purposeMobile from "../../assets/images/asi-purpose-mobile.jpg";
-import purposeTablet from "../../assets/images/asi-purpose-tablet.jpg";
-import purpose from "../../assets/images/asi-purpose-original.jpg";
+import purposeMobile from "@Assets/images/asi-purpose-mobile.jpg";
+import purposeTablet from "@Assets/images/asi-purpose-tablet.jpg";
+import purpose from "@Assets/images/asi-purpose-original.jpg";
 
-import oppMobile from "../../assets/images/opportunity-mobile.jpg";
-import oppTablet from "../../assets/images/opportunity-tablet.jpg";
-import opp from "../../assets/images/opportunity-original.jpg";
+import oppMobile from "@Assets/images/opportunity-mobile.jpg";
+import oppTablet from "@Assets/images/opportunity-tablet.jpg";
+import opp from "@Assets/images/opportunity-original.jpg";
 
-import stratMobile from "../../assets/images/strategy-mobile.jpg";
-import stratTablet from "../../assets/images/strategy-tablet.jpg";
-import strat from "../../assets/images/strategy-original.jpg";
+import stratMobile from "@Assets/images/strategy-mobile.jpg";
+import stratTablet from "@Assets/images/strategy-tablet.jpg";
+import strat from "@Assets/images/strategy-original.jpg";
 
 class About extends Component {
   render() {

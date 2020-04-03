@@ -1,17 +1,15 @@
-import { tokenCache } from "../hooks/authentication";
+import { tokenCache } from "@Hooks/authentication";
 
 import loadable from "@loadable/component";
 
 //Lazy load all components except the component for root or home
-const AsyncAccount = loadable(() => import("../../core/Account/Account"));
-const AsyncLogout = loadable(() => import("../../core/Logout/Logout"));
-const AsyncDirectory = loadable(() => import("../../core/Directory/Directory"));
-const AsyncGraphiQL = loadable(() =>
-  import("../../core/GraphiQlWrap/GraphiQlWrap")
-);
-import Home from "../../core/Home/Home";
-import Login from "../../core/Login/Login";
-import Register from "../../core/Register/Register";
+const AsyncAccount = loadable(() => import("@Core/Account/Account"));
+const AsyncLogout = loadable(() => import("@Core/Logout/Logout"));
+const AsyncDirectory = loadable(() => import("@Core/Directory/Directory"));
+const AsyncGraphiQL = loadable(() => import("@Core/GraphiQlWrap/GraphiQlWrap"));
+import Home from "@Core/Home/Home";
+import Login from "@Core/Login/Login";
+import Register from "@Core/Register/Register";
 
 /**
  * How to use:

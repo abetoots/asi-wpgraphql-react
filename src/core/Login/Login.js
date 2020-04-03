@@ -5,16 +5,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 //Components
-import Layout from "../../components/layout";
-import Form from "../../components/UI/Form/Form";
-import Input from "../../components/UI/Input/Input";
-import BoundaryRedirect from "../../hoc/BoundaryRedirect/BoundaryRedirect";
+import Form from "@Bits/Form/Form";
+import Input from "@Bits/Input/Input";
+import Layout from "@Components/layout";
+import BoundaryRedirect from "@Hoc/BoundaryRedirect/BoundaryRedirect";
 
 //Misc
-import { useLazyLoginMutation } from "../../misc/hooks/authentication";
-import inputs, { useFormState } from "../../misc/forms/login";
-import { getLoginMutation } from "../../misc/shared/graphql-requests";
 import { store } from "../../index";
+import inputs, { useFormState } from "@Forms/login";
+import { useLazyLoginMutation } from "@Hooks/authentication";
+import { getLoginMutation } from "@Shared/graphql-requests";
 
 const Login = props => {
   const [formState, setFormState] = useFormState();

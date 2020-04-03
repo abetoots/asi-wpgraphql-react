@@ -3,10 +3,10 @@ import "./Filters.scss";
 import PropTypes from "prop-types";
 
 //Components
-import BackDrop from "../../../components/UI/Backdrop/Backdrop";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import BackDrop from "@Bits/Backdrop/Backdrop";
+import Button from "@Bits/Button/Button";
 import Controls from "./FilterControls/FilterControls";
-import Button from "../../../components/UI/Button/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Filters = props => {
   const [showBackDrop, setShowBackDrop] = useState(false);

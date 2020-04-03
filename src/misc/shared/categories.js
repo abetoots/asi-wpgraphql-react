@@ -1,4 +1,4 @@
-import * as categoryicons from "../../assets/categoryicons/index";
+import * as categoryicons from "@Assets/categoryicons/index";
 
 export const categoryIcons = [
   {

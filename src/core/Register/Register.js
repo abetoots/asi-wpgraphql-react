@@ -4,16 +4,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 //Components
-import Layout from "../../components/layout";
-import Form from "../../components/UI/Form/Form";
-import Input from "../../components/UI/Input/Input";
+import Layout from "@Components/layout";
+import Form from "@Bits/Form/Form";
+import Input from "@Bits/Input/Input";
 
 //Misc
-import inputs, { useFormState } from "../../misc/forms/register";
-import { useLazyRegisterUser } from "../../misc/hooks/useLazyRegisterUser";
 import { store } from "../../index";
-import { getRegisterUserMutation } from "../../misc/shared/graphql-requests";
-import * as actions from "../../misc/store/actions/index";
+import inputs, { useFormState } from "@Forms/register";
+import { useLazyRegisterUser } from "@Hooks/useLazyRegisterUser";
+import { getRegisterUserMutation } from "@Shared/graphql-requests";
+import * as actions from "@Store/actions/index";
 
 const Register = props => {
   const [formState, setFormState] = useFormState();

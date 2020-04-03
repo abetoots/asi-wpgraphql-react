@@ -12,11 +12,11 @@ import RoutesList from "./core/RoutesList/RoutesList";
 import BoundaryUI from "./hoc/BoundaryUI/BoundaryUI";
 
 //Misc
-import { list } from "./misc/shared/link-list";
-import { uniqueRoutes } from "./misc/shared/helper-funcs";
-import { useRefreshToken } from "./misc/hooks/authentication";
-import { REFRESH_TOKEN } from "./misc/shared/constants";
-import * as actions from "./misc/store/actions/index";
+import { list } from "@Shared/link-list";
+import { uniqueRoutes } from "@Shared/helper-funcs";
+import { REFRESH_TOKEN } from "@Shared/constants";
+import { useRefreshToken } from "@Hooks/authentication";
+import * as actions from "@Store/actions/index";
 
 const App = props => {
   const routes = uniqueRoutes(list.flat());

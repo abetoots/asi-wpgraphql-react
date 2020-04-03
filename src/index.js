@@ -13,10 +13,10 @@ import { Provider } from "react-redux";
 //> Middleware
 import ReduxThunk from "redux-thunk";
 //> Reducers
-import authReducer from "./misc/store/reducers/authentication";
-import accReducer from "./misc/store/reducers/account";
-import vendorsReducer from "./misc/store/reducers/vendors";
-import registrationReducer from "./misc/store/reducers/registration";
+import authReducer from "@Store/reducers/authentication";
+import accReducer from "@Store/reducers/account";
+import vendorsReducer from "@Store/reducers/vendors";
+import registrationReducer from "@Store/reducers/registration";
 
 export const rootReducer = combineReducers({
   auth: authReducer,

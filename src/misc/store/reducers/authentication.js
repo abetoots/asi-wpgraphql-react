@@ -1,7 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
-import { tokenCache } from "../../hooks/authentication";
-import { updateObject } from "../../shared/helper-funcs";
-import { cleanupLocalStorage } from "../../hooks/authentication";
+import { tokenCache, cleanupLocalStorage } from "@Hooks/authentication";
+import { updateObject } from "@Shared/helper-funcs";
 
 const initialState = {
   called: false,

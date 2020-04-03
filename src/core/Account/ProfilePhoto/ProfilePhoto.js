@@ -5,22 +5,22 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 //Components
-import Upload from "../../../components/UI/Upload/Upload";
-import ChooseButton from "../../../components/UI/Upload/UploadButton/choose";
-import RemoveButton from "../../../components/UI/Upload/UploadButton/remove";
-import SaveButton from "../../../components/UI/Upload/UploadButton/save";
+import Upload from "@Bits/Upload/Upload";
+import UploadPreview from "@Bits/Upload/UploadPreview/UploadPreview";
+import ChooseButton from "@Bits/Upload/UploadButton/choose";
+import RemoveButton from "@Bits/Upload/UploadButton/remove";
+import SaveButton from "@Bits/Upload/UploadButton/save";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //Misc
+import avatar from "@Assets/user.svg";
 import {
   PROFILE_PHOTO,
   ACTION_AJAX_UPLOAD_FILE,
   ATTACHMENT_ID
-} from "../../../misc/shared/constants";
-import UploadPreview from "../../../components/UI/Upload/UploadPreview/UploadPreview";
-import avatar from "../../../assets/user.svg";
-import { isFile } from "../../../misc/shared/helper-funcs";
-import * as actions from "../../../misc/store/actions/index";
+} from "@Shared/constants";
+import { isFile } from "@Shared/helper-funcs";
+import * as actions from "@Store/actions/index";
 
 const ProfilePhoto = props => {
   const [uploadState, setUploadState] = useState({

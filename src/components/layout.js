@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import Spinner2 from "./UI/Spinner/Spinner2";
+import Header from "@Components/Header/Header";
+import Footer from "@Components/Footer/Footer";
+import Spinner2 from "@Bits/Spinner/Spinner2";
 
 const Layout = props => {
   // eslint-disable-next-line react/prop-types

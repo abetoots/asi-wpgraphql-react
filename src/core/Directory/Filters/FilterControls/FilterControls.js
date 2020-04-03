@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import "./FilterControls.scss";
 
 //Components
-import Form from "../../../../components/UI/Form/Form";
-import Input from "../../../../components/UI/Input/Input";
-import Search from "../../../../components/UI/Search/Search";
+import Form from "@Bits/Form/Form";
+import Input from "@Bits/Input/Input";
+import Search from "@Bits/Search/Search";
 
 //Misc
-import inputs, { useFormState } from "../../../../misc/forms/filters";
+import inputs, { useFormState } from "@Forms/filters";
 
 const FilterControls = props => {
   const [formState, setFormState] = useFormState();
