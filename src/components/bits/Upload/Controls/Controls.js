@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { makeStyles } from "@material-ui/styles";
-
 //Component
 import Button from "@Bits/Button/Button";
+
+//Misc
+import { makeStyles } from "@material-ui/styles";
 
 //Define which styles of the component you want to expose. Only what you expose can be overridden.
 /**
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
 });
 
 const Controls = (props) => {
-  //Allow override by passing the parent's props. Overriding must be done through modifiers
+  //Consume with props to return classes that are either merged or replaced depending on what you defined above
   const classes = useStyles(props);
 
   return (

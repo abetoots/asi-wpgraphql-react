@@ -1,15 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { makeStyles } from "@material-ui/styles";
-
 //Components
 import Controls from "./Controls";
 
 //Misc
 import { isFile } from "@Shared/helper-funcs";
+import { makeStyles } from "@material-ui/styles";
 
-//Generate a hook. Consume to generate the styles then apply to the component
+//Define which styles of the component you want to expose. Only what you expose can be overridden.
+/**
+ * makeStyles returns a function.
+ * consume: when consumed with props, checks props.classes internally.
+ * behavior: props.classes will MERGE with only what you exposed
+ */
 const useStyles = makeStyles({
   modifier: {
     backgroundColor: "#4285f4",
@@ -17,8 +21,16 @@ const useStyles = makeStyles({
   },
 });
 
+/**
+ * Component API
+ * Overrides:
+ *  - btnText: defaults to "Choose Upload"
+ *  - hasFileBtnText: when user currently has a file selection, this text takes over btnText. defaults to "Change Upload"
+ *
+ * @param {*} props
+ */
 const Choose = (props) => {
-  //Allow override by passing the parent's props. Overriding must be done through modifiers
+  //Consume with props to return classes that are either merged or replaced depending on what you defined above
   const classes = useStyles(props);
 
   //Children
@@ -51,7 +63,9 @@ const Choose = (props) => {
 
   return (
     <Controls
-      classes={{ modifier: `${props.classes || classes.modifier}` }}
+      classes={{
+        modifier: `${props.classes || classes.modifier}`,
+      }}
       onClick={(e) => chooseFileHandler(e, props.inputRef)}
       aria-label={ariaLabel}
     >
@@ -62,7 +76,7 @@ const Choose = (props) => {
 
 Choose.defaultProps = {
   btnText: "Choose File",
-  hasFileBtnText: "hasFileBtnText",
+  hasFileBtnText: "Change File",
 };
 
 Choose.propTypes = {
