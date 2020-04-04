@@ -7,7 +7,7 @@ describe("Header", () => {
     const { getByRole } = renderWithRouter(<Header />);
     const menu = getByRole("navigation");
     expect(menu).toBeInTheDocument();
-    expect(menu).toHaveClass("-hidden");
+    expect(menu).toHaveClass("_hidden");
   });
 
   it("finds a logo with an alt text", () => {
