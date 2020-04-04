@@ -35,7 +35,8 @@ module.exports = {
       ["@Hoc"]: path.resolve(__dirname, "src/hoc/"),
       ["@Hooks"]: path.resolve(__dirname, "src/misc/hooks/"),
       ["@Shared"]: path.resolve(__dirname, "src/misc/shared/"),
-      ["@Store"]: path.resolve(__dirname, "src/misc/store/")
+      ["@Store"]: path.resolve(__dirname, "src/misc/store/"),
+      ["@Styles"]: path.resolve(__dirname, "src/misc/styles/")
     }
   }
 };
