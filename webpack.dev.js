@@ -27,20 +27,62 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.module\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
           "style-loader",
           // Translates CSS into CommonJS
-          "css-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              sourceMap: true
+            }
+          },
           // Compiles Sass to CSS
-          "sass-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            }
+          },
           {
             loader: "sass-resources-loader",
             options: {
               resources: [
-                "./src/styles/util/_variables.scss",
-                "./src/styles/tools/*.scss"
+                "./src/sass/util/_variables.scss",
+                "./src/sass/tools/*.scss"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        exclude: /\.module\.(s[ac]ss)$/,
+        use: [
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true
+            }
+          },
+          // Compiles Sass to CSS
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: "sass-resources-loader",
+            options: {
+              resources: [
+                "./src/sass/util/_variables.scss",
+                "./src/sass/tools/*.scss"
               ]
             }
           }

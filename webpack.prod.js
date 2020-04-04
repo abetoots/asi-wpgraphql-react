@@ -63,7 +63,10 @@ module.exports = merge(common, {
           {
             loader: "sass-resources-loader",
             options: {
-              resources: ["./path/to/resources"]
+              resources: [
+                "./src/sass/util/_variables.scss",
+                "./src/sass/tools/*.scss"
+              ]
             }
           }
         ]
