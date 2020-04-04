@@ -1,13 +1,13 @@
 .Filters {
 
     &__slot {
-        &.-mobile {
+        &._mobile {
             @include media-query($medium-up) {
                 display: none;
             }
         }
 
-        &.-desktop {
+        &._desktop {
             display: none;
 
             @include media-query($medium-up) {
@@ -37,7 +37,7 @@
         min-height: 100vh;
         top: 15px;
 
-        &.-toggled {
+        &._toggled {
             left: 0;
         }
 

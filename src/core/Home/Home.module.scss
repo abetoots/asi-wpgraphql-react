@@ -6,14 +6,12 @@
     justify-content: center;
 
     &__layout {
-        &.-hero {
-            @include media-query($medium-up) {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-gap: 1rem;
-            }
-
+        @include media-query($medium-up) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1rem;
         }
+
     }
 
     &__search {
@@ -40,7 +38,7 @@
     &__subSlot {
         text-align: center;
 
-        &.-panel {
+        &._panel {
             display: flex;
             flex-flow: column;
             padding: 30px;

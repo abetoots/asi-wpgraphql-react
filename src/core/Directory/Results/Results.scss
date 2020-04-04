@@ -5,13 +5,13 @@
         grid-auto-rows: max-content;
         gap: 15px;
 
-        &.-loading {
+        &._loading {
             display: block;
         }
     }
 
     &__slot {
-        &.-refresh {
+        &._refresh {
             display: flex;
             align-items: center;
             margin-bottom: 1rem;

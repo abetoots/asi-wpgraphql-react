@@ -1,14 +1,14 @@
-.FilterControls {
+.Controls {
     padding: 5px;
     background-color: inherit;
 
     &__slot {
 
-        &.-search {
+        &._search {
             margin-bottom: 15px;
         }
 
-        &.-mobileBtn {
+        &._mobileBtn {
             margin-bottom: 10px;
         }
     }

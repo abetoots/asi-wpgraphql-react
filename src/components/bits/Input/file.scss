@@ -1,7 +1,7 @@
 .File {
 
     &__slot {
-        &.-flex {
+        &._flex {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -42,11 +42,11 @@
                 0 4px 15px 0 rgba(0, 0, 0, .15);
         }
 
-        &.-save {
+        &._save {
             background-color: #51c255;
         }
 
-        &.-remove {
+        &._remove {
             background-color: rgb(220, 0, 78);
         }
     }
