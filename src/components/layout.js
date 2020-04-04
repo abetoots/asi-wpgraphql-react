@@ -5,7 +5,7 @@ import Header from "@Components/Header/Header";
 import Footer from "@Components/Footer/Footer";
 import Spinner2 from "@Bits/Spinner/Spinner2";
 
-const Layout = props => {
+const Layout = (props) => {
   // eslint-disable-next-line react/prop-types
   const { children } = props;
 
@@ -18,7 +18,7 @@ const Layout = props => {
         style={{
           display: "flex",
           height: "100%",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <Spinner2 />
@@ -37,7 +37,7 @@ const Layout = props => {
       <main
         style={{
           minHeight: "calc(100vh - 128px)",
-          ...props.mainStyle
+          ...props.mainStyle,
         }}
       >
         {error || loading || children}
@@ -51,7 +51,7 @@ Layout.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.string,
   loadingComponent: PropTypes.elementType,
-  mainStyle: PropTypes.object
+  mainStyle: PropTypes.object,
 };
 
 export default Layout;
