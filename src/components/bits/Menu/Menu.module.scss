@@ -1,13 +1,22 @@
-.SubMenu {
+.Menu {
     $self: &;
+    font-weight: 700;
+    margin: 0 auto;
 
-    transition: height .3s ease-in;
-    height: 0;
-    overflow: hidden;
+    &._desktopOnly {
+        display: none;
+
+        @include media-query($medium-up) {
+            display: block;
+        }
+    }
+
+    &._hidden {
+        @include visually-hidden;
+    }
 
     &:focus-within {
-        height: initial;
-        overflow: unset;
+        @include visually-shown;
     }
 
     &__ul {
@@ -15,7 +24,7 @@
         margin: 0;
         padding: 1rem;
 
-        &.-horizontal {
+        &._horizontal {
             display: flex;
 
             #{$self}__li {
@@ -31,6 +40,15 @@
 
         &.active {
             color: #d9121f;
+        }
+    }
+
+    &__subMenuBtn {
+        margin-left: 5px;
+        background-color: transparent;
+
+        >span {
+            @include visually-hidden;
         }
     }
 

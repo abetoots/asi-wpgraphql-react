@@ -1,33 +1,61 @@
 import React, { useRef } from "react";
-import "./Menu.scss";
+import styles from "./Menu.module.scss";
 import PropTypes from "prop-types";
 
 //Components
 import { NavLink } from "react-router-dom";
-import Button from "../Button/Button";
+import Button from "@Bits/Button/Button";
 import SubMenu from "./SubMenu/SubMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-//TODO maybe handle more elegantly
-const Menu = props => {
+//Misc
+import { makeStyles } from "@material-ui/styles";
+
+//Define which styles of the component you want to expose. Only what you expose can be overridden.
+/**
+ * makeStyles returns a function.
+ * consume: when consumed with props, checks props.classes internally.
+ * behavior: props.classes will MERGE with only what you exposed
+ */
+const useStyles = makeStyles({
+  subMenuButton: styles.Menu__subMenuBtn,
+});
+
+//TODO maybe handle sub menus more elegantly
+const Menu = (props) => {
+  //Consume with props to return classes that are either merged or replaced depending on what you defined above
+  const classes = useStyles(props);
+  //Default styles
+  const {
+    Menu,
+    Menu__label,
+    Menu__ul,
+    Menu__li,
+    Menu__touchTarget,
+    Menu__link,
+    _horizontal,
+    _hidden,
+    _desktopOnly,
+  } = styles;
+
   const wrapperRef = useRef(null);
   const subMenuRef = useRef(null);
-  const classes = ["Menu"];
+  const menuClasses = [Menu];
 
   if (!props.visible) {
-    classes.push("-hidden");
+    menuClasses.push(_hidden);
   }
 
   if (props.desktopOnly) {
-    classes.push("-desktopOnly");
+    menuClasses.push(_desktopOnly);
   }
 
   let label;
   if (props.label) {
-    label = <h4 className="Menu__label">{props.label}</h4>;
+    label = <h4 className={Menu__label}>{props.label}</h4>;
   }
 
-  const expandSubMenuHandler = e => {
+  const expandSubMenuHandler = (e) => {
     e.preventDefault();
     if (subMenuRef.current === null) {
       console.log("target not found");
@@ -44,19 +72,21 @@ const Menu = props => {
   };
 
   return (
-    <nav className={classes.join(" ")}>
+    <nav className={menuClasses.join(" ")}>
       {label}
       <ul
-        className={`Menu__ul ${props.horizontal ? " -horizontal" : ""}`}
+        className={`${Menu__ul} ${props.horizontal ? _horizontal : ""}`}
         aria-expanded={props.visible}
       >
-        {props.linklist.map(item => {
+        {props.linklist.map((item) => {
           let subMenu;
           let subMenuButton;
           if (item.nest && item.nest[0]) {
             subMenuButton = (
               <Button
-                className="Menu__subMenuBtn"
+                classes={{
+                  root: classes.subMenuButton,
+                }}
                 onClick={expandSubMenuHandler}
               >
                 <FontAwesomeIcon icon="chevron-circle-down" />
@@ -72,10 +102,10 @@ const Menu = props => {
             );
           }
           return (
-            <li className="Menu__li" key={item.path}>
-              <NavLink to={item.path} exact={item.exact} className="Menu__link">
+            <li className={Menu__li} key={item.path}>
+              <NavLink to={item.path} exact={item.exact} className={Menu__link}>
                 <div
-                  className="Menu__touchTarget"
+                  className={Menu__touchTarget}
                   style={{ ...props.touchTargetStyles }}
                 >
                   <span>{item.label}</span>
@@ -92,7 +122,7 @@ const Menu = props => {
 };
 
 Menu.defaultProps = {
-  visible: true
+  visible: true,
 };
 
 Menu.propTypes = {
@@ -104,11 +134,11 @@ Menu.propTypes = {
       path: PropTypes.string.isRequired,
       exact: PropTypes.bool.isRequired,
       component: PropTypes.elementType.isRequired,
-      label: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired,
     }).isRequired
   ),
   touchTargetStyles: PropTypes.object,
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
 };
 
 export default Menu;

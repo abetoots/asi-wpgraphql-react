@@ -1,36 +1,42 @@
 import React from "react";
-import "./UploadButton.scss";
 import PropTypes from "prop-types";
-import { isFile } from "../../../../misc/shared/helper-funcs";
-import Button from "../../Button/Button";
 
-const Choose = props => {
-  //Button text
-  //Default: If user currently has a file selected, button text changes from "Choose Upload" to "Change Upload"
-  let btnText = "Choose File";
-  let hasFileBtnText = "Change File";
-  //Override
-  if (props.btnText) {
-    btnText = props.btnText;
-  }
-  if (props.hasFileBtnText) {
-    hasFileBtnText = props.hasFileBtnText;
-  }
+import { makeStyles } from "@material-ui/styles";
+
+//Components
+import Controls from "./Controls";
+
+//Misc
+import { isFile } from "@Shared/helper-funcs";
+
+//Generate a hook. Consume to generate the styles then apply to the component
+const useStyles = makeStyles({
+  modifier: {
+    backgroundColor: "#4285f4",
+    color: "#fff",
+  },
+});
+
+const Choose = (props) => {
+  //Allow override by passing the parent's props. Overriding must be done through modifiers
+  const classes = useStyles(props);
 
   //Children
   //Default: Single child <span/> with text changing depending on btnText and hasFileBtnTxt.
   let children = (
-    <span>{isFile(props.state.file) ? hasFileBtnText : btnText}</span>
+    <span>
+      {isFile(props.state.file) ? props.hasFileBtnText : props.btnText}
+    </span>
   );
-  //Override
   /**
+   * Override
    * Problem: We don't know if props.children will contain any text to make it accessible to screen readers.
    * Solution: We add an aria-label to the button depending on btnText and hasFileBtnTxt. This ensures our button
    * is accessible in case props.children won't contain any text
    */
   let ariaLabel;
   if (props.children) {
-    ariaLabel = isFile(props.state.file) ? hasFileBtnText : btnText;
+    ariaLabel = isFile(props.state.file) ? props.hasFileBtnText : props.btnText;
     children = props.children;
   }
 
@@ -44,28 +50,33 @@ const Choose = props => {
   };
 
   return (
-    <Button
-      className={props.className || "UploadButton -choose"}
-      onClick={e => chooseFileHandler(e, props.inputRef)}
+    <Controls
+      classes={{ modifier: `${props.classes || classes.modifier}` }}
+      onClick={(e) => chooseFileHandler(e, props.inputRef)}
       aria-label={ariaLabel}
     >
       {children}
-    </Button>
+    </Controls>
   );
+};
+
+Choose.defaultProps = {
+  btnText: "Choose File",
+  hasFileBtnText: "hasFileBtnText",
 };
 
 Choose.propTypes = {
   btnText: PropTypes.string,
   children: PropTypes.node,
-  className: PropTypes.string,
+  classes: PropTypes.string,
   inputRef: PropTypes.object.isRequired,
   hasFileBtnText: PropTypes.string,
   state: PropTypes.shape({
     file: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(File)])
       .isRequired,
     preview: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
-  })
+    url: PropTypes.string.isRequired,
+  }),
 };
 
 export default Choose;

@@ -1,20 +1,24 @@
 import React from "react";
-import "./UploadButton.scss";
 import PropTypes from "prop-types";
-import Button from "../../Button/Button";
 
-const Save = props => {
-  //Button text
-  //Default:
-  let btnText = "Save";
-  //Override
-  if (props.btnText) {
-    btnText = props.btnText;
-  }
+import { makeStyles } from "@material-ui/styles";
+
+import Controls from "./Controls";
+
+const useStyles = makeStyles({
+  modifier: {
+    backgroundColor: "#51c255",
+    color: "#fff",
+  },
+});
+
+const Save = (props) => {
+  //Allow override by passing the parent's props. Overriding must be done through modifiers
+  const classes = useStyles(props);
 
   //Children
   //Default: Single child <span/> with text depending on btnText.
-  let children = <span>{btnText}</span>;
+  let children = <span>{props.btnText}</span>;
   //Override
   /**
    * Problem: We don't know if props.children will contain any text to make it accessible to screen readers.
@@ -23,27 +27,31 @@ const Save = props => {
    */
   let ariaLabel;
   if (props.children) {
-    ariaLabel = btnText;
+    ariaLabel = props.btnText;
     children = props.children;
   }
 
   return (
-    <Button
-      className={props.className || "UploadButton -save"}
+    <Controls
+      classes={{ modifier: `${props.classes || classes.modifier}` }}
       onClick={props.handleSave}
       aria-label={ariaLabel}
     >
       {children}
-    </Button>
+    </Controls>
   );
+};
+
+Save.defaultProps = {
+  btnText: "Save",
 };
 
 Save.propTypes = {
   btnText: PropTypes.string,
   children: PropTypes.node,
-  className: PropTypes.string,
+  classes: PropTypes.string,
   handleSave: PropTypes.func.isRequired,
-  hasFileBtnText: PropTypes.string
+  hasFileBtnText: PropTypes.string,
 };
 
 export default Save;

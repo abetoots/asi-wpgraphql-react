@@ -1,59 +1,71 @@
 import React, { useRef } from "react";
-import "./Search.scss";
+import styles from "./Search.module.scss";
 import PropTypes from "prop-types";
 
-import Button from "../Button/Button";
+import Button from "@Bits/Button/Button";
 
-const Search = props => {
+import { exposeStylesWillReplace } from "@Styles/api";
+
+//Generate a hook. Consume to generate the styles then apply to the component
+//When consumed with props, behind the scenes it is only concerned with props.classes.
+//Only keys we expose below are overrideable. Existing styles are REPLACED with exposeStylesWillReplace()
+const useStyles = exposeStylesWillReplace({
+  button: styles.Search__button,
+  input: styles.Search__input,
+  tooltip: styles.Search__tooltip,
+});
+
+const Search = (props) => {
+  //Classes are meant to be replaced or merged depending on what you set above
+  const classes = useStyles(props);
+  //Default styles
+  const {
+    Search,
+    Search__label,
+    Search__icon,
+    Search__btnText,
+    _hidden,
+  } = styles;
+
   const parent = useRef(null);
 
-  const focusHandler = e => {
+  //TODO handle these
+  const focusHandler = (e) => {
     if (e.type === "focus") {
-      e.target.classList.add("-focused");
-      parent.current.classList.add("-focused");
+      e.target.classList.add("_focused");
+      parent.current.classList.add("_focused");
     } else {
-      e.target.classList.remove("-focused");
-      parent.current.classList.remove("-focused");
+      e.target.classList.remove("_focused");
+      parent.current.classList.remove("_focused");
     }
   };
 
-  let inputClass = "Search__input";
-  if (props.inputClassName) {
-    inputClass = props.inputClassName;
-  }
-
-  let buttonClass = "Search__button";
-  if (props.btnClassName) {
-    buttonClass = props.btnClassName;
-  }
-
   let tooltip;
   if (props.tooltip) {
-    tooltip = <span className="Search__tooltip">{props.tooltip}</span>;
+    tooltip = <span className={classes.tooltip}>{props.tooltip}</span>;
   }
 
-  //TODO fix id not properly replacing all spaces to hyphens
   return (
-    <form className="Search" onSubmit={props.handleSubmit} ref={parent}>
+    <form className={Search} onSubmit={props.handleSubmit} ref={parent}>
       <label
-        id={props.label.toLowerCase().replace(" ", "-")}
-        className={`Search__label ${props.showLabel ? "" : "-hidden"}`}
+        id={props.label.toLowerCase().replace(/\s/g, "-")}
+        className={`${Search__label} ${props.showLabel ? "" : _hidden}`}
       >
         {props.label}
       </label>
       <div style={{ position: "relative" }}>
         <input
-          aria-labelledby={props.label.toLowerCase().replace(" ", "-")}
-          className={inputClass}
+          aria-labelledby={props.label.toLowerCase().replace(/\s/g, "-")}
+          className={classes.input}
           onChange={props.handleChange}
           placeholder={props.placeholder}
           onFocus={focusHandler}
           onBlur={focusHandler}
         />
-        <Button className={buttonClass} type="submit">
-          <div className="Search__icon">{props.icon}</div>
+        <Button classes={{ root: classes.button }} type="submit">
+          <div className={Search__icon}>{props.icon}</div>
           <span
-            className={`Search__btnText ${props.showBtnText ? "" : "-hidden"}`}
+            className={`${Search__btnText} ${props.showBtnText ? "" : _hidden}`}
           >
             {props.btnText}
           </span>
@@ -79,7 +91,7 @@ Search.propTypes = {
   icon: PropTypes.element,
   tooltip: PropTypes.string,
   handleSubmit: PropTypes.func,
-  enableAutoResults: PropTypes.bool
+  enableAutoResults: PropTypes.bool,
 };
 
 export default Search;

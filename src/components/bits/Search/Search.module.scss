@@ -3,15 +3,15 @@
     box-sizing: border-box;
     position: relative;
 
-    &.-focused:not(.-touched),
-    &:focus:not(.-touched) {
+    &._focused:not(._touched),
+    &:focus:not(._touched) {
         #{$self}__tooltip {
             display: block;
         }
     }
 
     &__label {
-        &.-hidden {
+        &._hidden {
             @include visually-hidden;
         }
     }
@@ -63,7 +63,7 @@
     }
 
     &__btnText {
-        &.-hidden {
+        &._hidden {
             @include visually-hidden;
         }
     }

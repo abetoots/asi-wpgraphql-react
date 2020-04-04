@@ -8,13 +8,13 @@
     &__status {
         padding: 1rem;
 
-        &.-success {
+        &._success {
             background-color: rgb(170, 230, 138);
             color: rgb(52, 148, 1);
             padding: 15px;
         }
 
-        &.-error {
+        &._error {
             background-color: rgb(230, 138, 138);
             color: rgb(148, 18, 1);
         }

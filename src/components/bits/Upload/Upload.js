@@ -2,29 +2,44 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import "./Upload.scss";
 
+//Components
 import UploadPreview from "./UploadPreview/UploadPreview";
-import Choose from "./UploadButton/choose";
-import Save from "./UploadButton/save";
-import Remove from "./UploadButton/remove";
+import Choose from "./Controls/choose";
+import Save from "./Controls/save";
+import Remove from "./Controls/remove";
+
+//Misc
+import { makeStyles } from "@material-ui/styles";
+import { visuallyHidden } from "@Styles/mixins";
+
+//Define which styles of the component you want to expose. Only what you expose can be overridden.
+/**
+ * makeStyles returns a function.
+ * consume: when consumed with props, checks props.classes internally.
+ * behavior: props.classes will MERGE with only what you exposed
+ */
+const input = visuallyHidden();
+const useStyles = makeStyles({
+  root: {},
+  wrapper: {
+    display: "flex",
+    alignItems: "center",
+  },
+  input: input,
+});
 
 /**
- * TODO
- * Defaults:
- *  -
- *
- * Overrideables:
- *  - override from props.customProps
- *  - btnText: defaults to "Choose Upload"
- *  - hasFileBtnText: when user currently has a file selection, this text takes over btnText. defaults to "Change Upload"
- *  - override from props
+ * Component API
+ * Overrides:
  *  - showPreview: set to false if we want to handle the preview box elsewhere. always true inside an <Input/>
- *  - handleUpload: pass in a function to get the Save button to trigger the upload
- *  - saveBtnComponent: pass in a component to use your own save button
- *  - removeBtnComponent: pass in a component to use your own remove/delete button
+ *  - handleUpload: pass in a function to get the Save button to trigger the upload.
  *
  */
 // eslint-disable-next-line react/display-name
-const Upload = props => {
+const Upload = (props) => {
+  //Consume with props to return classes that are either merged or replaced depending on what you defined above
+  const classes = useStyles(props);
+
   let uploadInputRef;
   if (props.inputRef) {
     uploadInputRef = props.inputRef;
@@ -32,7 +47,7 @@ const Upload = props => {
     uploadInputRef = useRef(null);
   }
 
-  const fileInputHandler = event => {
+  const fileInputHandler = (event) => {
     //Return when user doesn't select anything
     if (event.target.files.length == 0) {
       return;
@@ -50,11 +65,11 @@ const Upload = props => {
     props.stateHandler({
       ...props.state,
       file: file,
-      preview: URL.createObjectURL(file)
+      preview: URL.createObjectURL(file),
     });
   };
 
-  const removeBtnHandler = e => {
+  const removeBtnHandler = (e) => {
     //TODO link as to why
     //We always want to revoke previous object url
     //Avoid memory issues by revoking the previous objecUrl created
@@ -63,7 +78,7 @@ const Upload = props => {
     props.stateHandler({
       ...props.state,
       file: "",
-      preview: ""
+      preview: "",
     });
   };
 
@@ -82,8 +97,10 @@ const Upload = props => {
     //Distribute some of parent's props to the children
     //https://reactjs.org/docs/react-api.html#reactchildren
     //https://reactjs.org/docs/react-api.html#cloneelement
-    controls = React.Children.map(props.children, child =>
-      React.cloneElement(child, { state: props.state })
+    controls = React.Children.map(props.children, (child) =>
+      React.cloneElement(child, {
+        state: props.state,
+      })
     );
   } else {
     controls = (
@@ -108,21 +125,22 @@ const Upload = props => {
         {...props.elementConfig}
         onChange={fileInputHandler}
         ref={uploadInputRef}
-        aria-labelledby={props.label.toLowerCase().replace(" ", "-")}
+        aria-labelledby={props.label.toLowerCase().replace(/\s/g, "-")}
       />
     </div>
   );
 };
 
 Upload.defaultProps = {
-  showPreview: false
+  showPreview: false,
 };
 
 Upload.propTypes = {
+  children: PropTypes.node,
   className: PropTypes.string,
   elementConfig: PropTypes.shape({
     type: PropTypes.string.isRequired,
-    accept: PropTypes.string.isRequired
+    accept: PropTypes.string.isRequired,
   }).isRequired,
   handleUpload: PropTypes.func,
   inputRef: PropTypes.object,
@@ -132,10 +150,9 @@ Upload.propTypes = {
     file: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(File)])
       .isRequired,
     preview: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
+    url: PropTypes.string.isRequired,
   }).isRequired,
   stateHandler: PropTypes.func.isRequired,
-  wrapperClassName: PropTypes.string
 };
 
 export default Upload;
