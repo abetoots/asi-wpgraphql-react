@@ -17,15 +17,16 @@ import { uniqueRoutes } from "@Shared/helper-funcs";
 import { REFRESH_TOKEN } from "@Shared/constants";
 import { useRefreshToken } from "@Hooks/authentication";
 import * as actions from "@Store/actions/index";
+import { StylesProvider } from "@material-ui/styles";
 
-const App = props => {
+const App = (props) => {
   const routes = uniqueRoutes(list.flat());
   const [mounted, setMounted] = useState(false);
 
   const [
     startRefresh,
     { loadingRefresh },
-    { successRefresh, token }
+    { successRefresh, token },
   ] = useRefreshToken();
 
   useEffect(() => {
@@ -45,21 +46,23 @@ const App = props => {
 
   return (
     <BrowserRouter>
-      <BoundaryUI loading={loadingRefresh}>
-        {mounted ? <RoutesList routes={routes} /> : ""}
-      </BoundaryUI>
+      <StylesProvider injectFirst>
+        <BoundaryUI loading={loadingRefresh}>
+          {mounted ? <RoutesList routes={routes} /> : ""}
+        </BoundaryUI>
+      </StylesProvider>
     </BrowserRouter>
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    authSuccess: user => dispatch(actions.authSuccess(user))
+    authSuccess: (user) => dispatch(actions.authSuccess(user)),
   };
 };
 
 App.propTypes = {
-  authSuccess: PropTypes.func
+  authSuccess: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(App);
