@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import "./FilterControls.scss";
+import styles from "./Controls.module.scss";
 
 //Components
 import Form from "@Bits/Form/Form";
@@ -10,7 +10,7 @@ import Search from "@Bits/Search/Search";
 //Misc
 import inputs, { useFormState } from "@Forms/filters";
 
-const FilterControls = props => {
+const Controls = (props) => {
   const [formState, setFormState] = useFormState();
 
   const [activeFilters, setActiveFilters] = useState({});
@@ -20,35 +20,36 @@ const FilterControls = props => {
   useEffect(() => {
     setActiveFilters({
       ...activeFilters,
-      ...formState
+      ...formState,
     });
   }, [formState]);
 
   useEffect(() => {
     setActiveFilters({
       ...activeFilters,
-      search: textVal
+      search: textVal,
     });
   }, [textVal]);
 
+  const { Controls, Controls__slot, _search, _filters } = styles;
   return (
-    <div className="FilterControls">
-      <div className="FilterControls__slot -search">
+    <div className={Controls}>
+      <div className={`${Controls__slot} ${_search}`}>
         <Search
-          handleChange={e => setTextVal(e.target.value)}
-          handleSubmit={e => props.handleSubmit(e, activeFilters)}
+          handleChange={(e) => setTextVal(e.target.value)}
+          handleSubmit={(e) => props.handleSubmit(e, activeFilters)}
           label="Search filter"
           btnText="Search"
           placeholder="Search..."
         />
       </div>
 
-      <div className="FilterControls__slot -filters">
+      <div className={`${Controls__slot} ${_filters}`}>
         <Form
-          handleSubmit={e => props.handleSubmit(e, activeFilters)}
+          handleSubmit={(e) => props.handleSubmit(e, activeFilters)}
           btnText="Refine Search Results"
         >
-          {inputs.map(input => {
+          {inputs.map((input) => {
             return (
               <Input
                 state={formState}
@@ -73,8 +74,8 @@ const FilterControls = props => {
   );
 };
 
-FilterControls.propTypes = {
-  handleSubmit: PropTypes.func.isRequired
+Controls.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
 };
 
-export default FilterControls;
+export default Controls;
