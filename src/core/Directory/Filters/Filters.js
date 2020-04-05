@@ -5,27 +5,27 @@ import PropTypes from "prop-types";
 //Components
 import BackDrop from "@Bits/Backdrop/Backdrop";
 import Button from "@Bits/Button/Button";
-import Controls from "./FilterControls/FilterControls";
+import Controls from "./Controls/Controls";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Filters = props => {
+const Filters = (props) => {
   const [showBackDrop, setShowBackDrop] = useState(false);
 
   const targetMobileEl = useRef(null);
 
-  const backDropClickHandler = e => {
-    targetMobileEl.current.classList.toggle("-toggled");
+  const backDropClickHandler = (e) => {
+    targetMobileEl.current.classList.toggle("_toggled");
     setShowBackDrop(false);
   };
 
-  const mobileClickHandler = e => {
-    targetMobileEl.current.classList.toggle("-toggled");
+  const mobileClickHandler = (e) => {
+    targetMobileEl.current.classList.toggle("_toggled");
     setShowBackDrop(true);
   };
 
   return (
     <div className="Filters">
-      <div className="Filters__slot -mobile">
+      <div className="Filters__slot _mobile">
         <BackDrop show={showBackDrop} handleClick={backDropClickHandler} />
         <Button onClick={mobileClickHandler} className="Filters__mobileBtn">
           <FontAwesomeIcon icon={["fas", "sliders-h"]} />
@@ -35,7 +35,7 @@ const Filters = props => {
           <Controls handleSubmit={props.handleFilter} />
         </div>
       </div>
-      <div className="Filters__slot -desktop">
+      <div className="Filters__slot _desktop">
         <Controls handleSubmit={props.handleFilter} />
       </div>
     </div>
@@ -43,7 +43,7 @@ const Filters = props => {
 };
 
 Filters.propTypes = {
-  handleFilter: PropTypes.func
+  handleFilter: PropTypes.func,
 };
 
 export default Filters;
