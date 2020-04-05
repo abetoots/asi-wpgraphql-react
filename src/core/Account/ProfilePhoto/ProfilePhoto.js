@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./ProfilePhoto.scss";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
+import { makeStyles } from "@material-ui/styles";
 
 //Components
 import Upload from "@Bits/Upload/Upload";
 import UploadPreview from "@Bits/Upload/UploadPreview/UploadPreview";
-import ChooseButton from "@Bits/Upload/UploadButton/choose";
-import RemoveButton from "@Bits/Upload/UploadButton/remove";
-import SaveButton from "@Bits/Upload/UploadButton/save";
+import ChooseButton from "@Bits/Upload/Controls/choose";
+import RemoveButton from "@Bits/Upload/Controls/remove";
+import SaveButton from "@Bits/Upload/Controls/save";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //Misc
@@ -17,21 +17,43 @@ import avatar from "@Assets/user.svg";
 import {
   PROFILE_PHOTO,
   ACTION_AJAX_UPLOAD_FILE,
-  ATTACHMENT_ID
+  ATTACHMENT_ID,
 } from "@Shared/constants";
 import { isFile } from "@Shared/helper-funcs";
 import * as actions from "@Store/actions/index";
 
-const ProfilePhoto = props => {
+const useStyles = makeStyles({
+  btn: {
+    position: "absolute",
+    borderRadius: "50%",
+    fontWeight: 500,
+    boxShadow: `0 2px 5px 0 rgba(0, 0, 0, 0.16),
+            0 2px 10px 0 rgba(0, 0, 0, 0.12)`,
+  },
+  chooseBtn: {
+    bottom: 0,
+    right: "18px",
+    border: ".5px solid #ccc",
+  },
+  removeBtn: {
+    backgroundColor: "rgb(220, 0, 78)",
+    bottom: 0,
+    border: 0,
+    right: "-12px",
+  },
+});
+
+const ProfilePhoto = (props) => {
+  const classes = useStyles();
   const [uploadState, setUploadState] = useState({
     file: "",
     preview: "",
-    url: ""
+    url: "",
   });
 
   const [uploadError, setUploadError] = useState({
     errorDev: null,
-    output: ""
+    output: "",
   });
 
   const uploadInputRef = useRef(null);
@@ -47,7 +69,7 @@ const ProfilePhoto = props => {
     }
   }, [props.fetchedAccount, props.uploadedNew]);
 
-  const uploadHandler = async e => {
+  const uploadHandler = async (e) => {
     e.preventDefault();
 
     if (!isFile(uploadState.file)) {
@@ -67,11 +89,11 @@ const ProfilePhoto = props => {
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${props.token}`
+            Authorization: `Bearer ${props.token}`,
           },
-          body: data
+          body: data,
         }
-      ).then(res => {
+      ).then((res) => {
         console.log("Fetch response", res);
         if (res.ok) {
           return res.json();
@@ -87,12 +109,12 @@ const ProfilePhoto = props => {
 
       setUploadError({
         errorDev: err,
-        output: "Upload failed!"
+        output: "Upload failed!",
       });
     }
   };
 
-  const removeBtnHandler = e => {
+  const removeBtnHandler = (e) => {
     //TODO link as to why
     //We always want to revoke previous object url
     //Avoid memory issues by revoking the previous objecUrl created
@@ -101,7 +123,7 @@ const ProfilePhoto = props => {
     setUploadState({
       ...uploadState,
       file: "",
-      preview: ""
+      preview: "",
     });
   };
 
@@ -138,7 +160,7 @@ const ProfilePhoto = props => {
       errorTimer = setTimeout(() => {
         setUploadError({
           errorDev: null,
-          output: ""
+          output: "",
         });
       }, 4000);
     }
@@ -156,7 +178,7 @@ const ProfilePhoto = props => {
         label="Upload profile photo"
         elementConfig={{
           type: "file",
-          accept: "image/png, image/jpeg"
+          accept: "image/png, image/jpeg",
         }}
       >
         <UploadPreview
@@ -166,13 +188,13 @@ const ProfilePhoto = props => {
           placeholder={avatar}
         />
         <ChooseButton
-          className="ProfilePhoto__btn -choose"
+          classes={{ root: `${classes.btn} ${classes.chooseBtn}` }}
           inputRef={uploadInputRef}
         >
           <FontAwesomeIcon icon="camera" />
         </ChooseButton>
         <RemoveButton
-          className="ProfilePhoto__btn -remove"
+          classes={{ root: `${classes.btn} ${classes.removeBtn}` }}
           handleRemove={removeBtnHandler}
         >
           <FontAwesomeIcon icon="trash" />
@@ -183,22 +205,22 @@ const ProfilePhoto = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     fetchedAccount: state.account.fetched,
     token: state.auth.token,
     uploading: state.account.updating,
     uploadedNew: state.account.uploaded,
     uploadSuccess: state.account.updated,
-    userAccount: state.account.data.user
+    userAccount: state.account.data.user,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     startUpload: () => dispatch(actions.uploadProfilePhotoStart()),
-    uploadSuccess: data => dispatch(actions.uploadProfilePhotoSuccess(data)),
-    uploadFailed: err => dispatch(actions.uploadProfilePhotoFailed(err))
+    uploadSuccess: (data) => dispatch(actions.uploadProfilePhotoSuccess(data)),
+    uploadFailed: (err) => dispatch(actions.uploadProfilePhotoFailed(err)),
   };
 };
 
@@ -210,7 +232,7 @@ ProfilePhoto.propTypes = {
   uploadedNew: PropTypes.bool,
   uploadSuccess: PropTypes.func,
   uploadFailed: PropTypes.func,
-  userAccount: PropTypes.object
+  userAccount: PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePhoto);
