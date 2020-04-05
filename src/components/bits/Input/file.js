@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import "./file.scss";
 
-import UploadPreview from "../Upload/UploadPreview/UploadPreview";
-import Choose from "../Upload/UploadButton/choose";
-import Remove from "../Upload/UploadButton/remove";
+import UploadPreview from "@Bits/Upload/UploadPreview/UploadPreview";
+import Choose from "@Bits/Upload/Controls/choose";
+import Remove from "@Bits/Upload/Controls/remove";
 
 /**
  * Defaults:
@@ -16,7 +16,7 @@ import Remove from "../Upload/UploadButton/remove";
  *  - showPreview: set to false if you want to handle preview elsewhere.
  *
  */
-const File = props => {
+const File = (props) => {
   const fileInputEl = useRef(null);
 
   /**
@@ -24,11 +24,11 @@ const File = props => {
    * Problem: We can't style <input type="file"/> buttons through css
    * Solution: We delegate it to a different button we can style which simply triggers a click on <input type="file"/>
    */
-  const chooseFileHandler = event => {
+  const chooseFileHandler = (event) => {
     fileInputEl.current.click();
   };
 
-  const fileInputHandler = event => {
+  const fileInputHandler = (event) => {
     //Return when user doesn't select anything
     if (event.target.files.length == 0) {
       return;
@@ -46,11 +46,11 @@ const File = props => {
     props.stateHandler(props.inputKey, {
       ...props.state[props.inputKey],
       file: file,
-      preview: URL.createObjectURL(file)
+      preview: URL.createObjectURL(file),
     });
   };
 
-  const removeBtnHandler = e => {
+  const removeBtnHandler = (e) => {
     //REMOVE should remove the preview and the file from the state
     //TODO link as to why
     //We always want to revoke previous object url
@@ -60,7 +60,7 @@ const File = props => {
     props.stateHandler(props.inputKey, {
       ...props.state[props.inputKey],
       file: "",
-      preview: ""
+      preview: "",
     });
   };
 
@@ -79,7 +79,7 @@ const File = props => {
     //Distribute some of parent's props to the children
     //https://reactjs.org/docs/react-api.html#reactchildren
     //https://reactjs.org/docs/react-api.html#cloneelement
-    controls = React.Children.map(props.customProps.controls, child =>
+    controls = React.Children.map(props.customProps.controls, (child) =>
       React.cloneElement(child, { state: props.state[props.inputKey] })
     );
   } else {
@@ -104,7 +104,7 @@ const File = props => {
         {...props.elementConfig}
         onChange={fileInputHandler}
         ref={fileInputEl}
-        aria-labelledby={props.label.toLowerCase().replace(" ", "-")}
+        aria-labelledby={props.label.toLowerCase().replace(/\s/g, "-")}
       />
     </div>
   );
@@ -115,16 +115,16 @@ File.propTypes = {
     btnText: PropTypes.string,
     hasFileBtnText: PropTypes.string,
     showPreview: PropTypes.bool,
-    controls: PropTypes.element
+    controls: PropTypes.element,
   }),
   elementConfig: PropTypes.shape({
     type: PropTypes.string.isRequired,
-    accept: PropTypes.string.isRequired
+    accept: PropTypes.string.isRequired,
   }).isRequired,
   inputKey: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   state: PropTypes.object.isRequired,
-  stateHandler: PropTypes.func.isRequired
+  stateHandler: PropTypes.func.isRequired,
 };
 
 export default File;

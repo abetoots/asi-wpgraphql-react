@@ -2,7 +2,7 @@ import React from "react";
 import "./checkbox.scss";
 import PropTypes from "prop-types";
 
-const Checkbox = props => {
+const Checkbox = (props) => {
   /**
    * Checkbox input change handler
    * Handles checkbox cases where we expect the checkbox's state to be an array of currently checked values
@@ -10,7 +10,7 @@ const Checkbox = props => {
    * @param {Event} event The Event object
    * @param {Function} handler Handler function returned by a custom hook from props.registerState
    */
-  const checkboxHandler = e => {
+  const checkboxHandler = (e) => {
     //we make a copy (avoid referencing original array)
     //that we'll set as the new value at the end of this function
     let copy = [...props.state[props.inputKey]];
@@ -21,7 +21,7 @@ const Checkbox = props => {
     } else {
       //if checkbox is about to be unchecked
       // we also want to remove that value from the copied array
-      copy = copy.filter(val => val !== event.target.value);
+      copy = copy.filter((val) => val !== event.target.value);
     }
 
     //handler will now set the new array as the new value of this inputKey's state
@@ -30,17 +30,17 @@ const Checkbox = props => {
 
   return (
     <ul className="Checkbox">
-      {props.elementConfig.options.map(option => {
+      {props.elementConfig.options.map((option) => {
         return (
           <li key={option.value || option} className="Checkbox__li">
             <input
               id={option.value || option}
               className="Checkbox__input"
               type="checkbox"
-              value={option.value || option.toLowerCase().replace(" ", "-")}
+              value={option.value || option.toLowerCase().replace(/\s/g, "-")}
               checked={
                 props.state[props.inputKey].includes(
-                  option.value || option.toLowerCase().replace(" ", "-")
+                  option.value || option.toLowerCase().replace(/\s/g, "-")
                 ) ||
                 option.value === props.initialValue ||
                 option === props.initialValue
@@ -66,17 +66,17 @@ Checkbox.propTypes = {
       PropTypes.arrayOf(
         PropTypes.shape({
           value: PropTypes.string,
-          label: PropTypes.string
+          label: PropTypes.string,
         })
-      )
-    ]).isRequired
+      ),
+    ]).isRequired,
   }),
   focusHandler: PropTypes.func,
   initialValue: PropTypes.string,
   inputKey: PropTypes.string.isRequired,
   label: PropTypes.string,
   state: PropTypes.object.isRequired,
-  stateHandler: PropTypes.func.isRequired
+  stateHandler: PropTypes.func.isRequired,
 };
 
 export default Checkbox;

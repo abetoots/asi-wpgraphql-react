@@ -10,22 +10,22 @@ import Toggle from "./toggle";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Input = props => {
+const Input = (props) => {
   let inputElement;
 
   //Adds/removes a focused class
-  const focusHandler = event => {
+  const focusHandler = (event) => {
     if (event.type === "focus") {
-      event.target.classList.add("-focused");
-      event.target.parentElement.classList.add("-focused");
+      event.target.classList.add("_focused");
+      event.target.parentElement.classList.add("_focused");
       if (props.formRef) {
-        props.formRef.current.classList.add("-focused");
+        props.formRef.current.classList.add("_focused");
       }
     } else {
-      event.target.classList.remove("-focused");
-      event.target.parentElement.classList.remove("-focused");
+      event.target.classList.remove("_focused");
+      event.target.parentElement.classList.remove("_focused");
       if (props.formRef) {
-        props.formRef.current.classList.remove("-focused");
+        props.formRef.current.classList.remove("_focused");
       }
     }
   };
@@ -56,12 +56,14 @@ const Input = props => {
                   className="Input__inputEl"
                   {...props.elementConfig}
                   value={props.state[props.inputKey]}
-                  onChange={event =>
+                  onChange={(event) =>
                     props.stateHandler(props.inputKey, event.target.value)
                   }
                   onFocus={focusHandler}
                   onBlur={focusHandler}
-                  aria-labelledby={props.label.toLowerCase().replace(" ", "-")}
+                  aria-labelledby={props.label
+                    .toLowerCase()
+                    .replace(/\s/g, "-")}
                 />
                 <div className="Input__line"></div>
               </>
@@ -132,12 +134,12 @@ const Input = props => {
               className="Input__inputEl"
               {...props.elementConfig}
               value={props.state[props.inputKey]}
-              onChange={event =>
+              onChange={(event) =>
                 props.stateHandler(props.inputKey, event.target.value)
               }
               onFocus={focusHandler}
               onBlur={focusHandler}
-              aria-labelledby={props.label.toLowerCase().replace(" ", "-")}
+              aria-labelledby={props.label.toLowerCase().replace(/\s/g, "-")}
             />
             <div className="Input__line"></div>
           </>
@@ -174,7 +176,7 @@ const Input = props => {
   return (
     <div className="Input">
       <label
-        id={props.label.toLowerCase().replace(" ", "-")}
+        id={props.label.toLowerCase().replace(/\s/g, "-")}
         className="Input__label"
       >
         {props.label}
@@ -201,13 +203,13 @@ Input.propTypes = {
   formRef: PropTypes.object,
   iconConfig: PropTypes.shape({
     position: PropTypes.string,
-    icon: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
+    icon: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   }),
   initialValue: PropTypes.any,
   inputKey: PropTypes.string,
   label: PropTypes.string,
   state: PropTypes.object,
-  stateHandler: PropTypes.func.isRequired
+  stateHandler: PropTypes.func.isRequired,
 };
 
 export default Input;

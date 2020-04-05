@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./toggle.scss";
 
-const Toggle = props => {
+const Toggle = (props) => {
   /**
    * Toggle input change handler
    * @param {String} inputKey
@@ -24,12 +24,12 @@ const Toggle = props => {
         className="Toggle__input"
         type="checkbox"
         checked={props.state[props.inputKey] || props.initialValue}
-        onChange={event =>
+        onChange={(event) =>
           toggleHandler(props.inputKey, event, props.stateHandler)
         }
         onFocus={props.focusHandler}
         onBlur={props.focusHandler}
-        aria-lablledby={props.label.toLowerCase().replace(" ", "-")}
+        aria-lablledby={props.label.toLowerCase().replace(/\s/g, "-")}
       />
     </div>
   );
@@ -41,7 +41,7 @@ Toggle.propTypes = {
   focusHandler: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   state: PropTypes.object.isRequired,
-  stateHandler: PropTypes.func.isRequired
+  stateHandler: PropTypes.func.isRequired,
 };
 
 export default Toggle;
