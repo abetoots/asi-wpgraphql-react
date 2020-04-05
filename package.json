@@ -1,6 +1,6 @@
 {
     "name": "asi-wpgraphql-react",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "ASI web app made to interact with WP GraphQl & WP GraphQl JWT Authentication + SASS & PWA support",
     "scripts": {
         "start": "webpack-dev-server --hot --inline --config webpack.dev.js --open",
