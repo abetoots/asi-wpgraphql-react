@@ -21,7 +21,7 @@
         "@loadable/component": "^5.12.0",
         "@material-ui/styles": "^4.9.6",
         "apollo-boost": "^0.4.7",
-        "graphiql": "^0.17.5",
+        "graphiql": "^1.4.7",
         "graphql": "^14.6.0",
         "html-react-parser": "^0.10.3",
         "isomorphic-fetch": "^2.2.1",
